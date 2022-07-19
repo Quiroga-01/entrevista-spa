@@ -1,0 +1,23 @@
+<div class="modal-header bg-primary">
+  <h4 class="modal-title text-light">Vacante</h4>
+  <button class="btn-close" aria-label="Close" type="button" (click)="modal.dismiss('dismiss')">
+  </button>
+</div>
+<form [formGroup]="vacanteForm" (ngSubmit)="submitForm()">
+  <div class="modal-body">
+    <div class="row">
+      <fieldset class="col-md-6 form-group">
+        <label for="">Area*:</label>
+        <input type="text" formControlName="area" class="form-control" placeholder="Nombre del area" (keydown.enter)="$event.preventDefault()">
+      </fieldset>
+      <fieldset class="col-md-6 form-group">
+        <label for="">Sueldo*:</label>
+        <input type="number" formControlName="sueldo" class="form-control" placeholder="Nombre del area" (keydown.enter)="$event.preventDefault()">
+      </fieldset>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.close('Close')">Close</button>
+    <button type="submit" [disabled]="vacanteForm.invalid" class="btn btn-primary">Guardar</button>
+  </div>
+</form>

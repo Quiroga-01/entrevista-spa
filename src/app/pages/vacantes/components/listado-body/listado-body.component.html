@@ -1,0 +1,30 @@
+<tr *ngFor='let vac of vacantes'>
+  <td>
+    <div class="d-flex align-items-center">
+      <div class="ms-3">
+        <h5 class="mb-0 font-medium">{{vac.id}}</h5>
+      </div>
+    </div>
+  </td>
+  <td class="fs-4">{{vac.area}}</td>
+  <td>
+    {{vac.sueldo | currency}}
+  </td>
+  <td>
+    <div *ngIf="vac.activo; else inactivo">
+      <span class="mb-1 me-2 badge rounded-pill bg-success">Activo</span>
+    </div>
+    <ng-template #inactivo>
+      <span class="mb-1 me-2 badge rounded-pill bg-danger">Inactivo</span>
+    </ng-template>
+  </td>
+  <td class="">
+    <div class="btn-group">
+      <button type="button" (click)="vacantesService.abrirModalVacante(vac)" class="btn btn-info"><i class="bi bi-pencil-square"></i></button>
+      <button *ngIf="vac.activo; else btnInactivo" class="btn btn-danger"><i class="bi bi-x-square"></i></button>
+      <ng-template #btnInactivo>
+        <button class="btn btn-success"><i class="bi bi-check2"></i></button>
+      </ng-template>
+    </div>
+  </td>
+</tr>

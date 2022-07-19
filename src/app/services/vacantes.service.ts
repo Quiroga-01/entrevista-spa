@@ -1,8 +1,8 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Vacante } from '../interfaces/vacantes';
-import { RespuestaGets, RespuestaPost } from '../interfaces/response';
+import { RespuestaRegistos, Respuesta, RespuestaPaginada } from '../interfaces/response';
 import { NgbModal, NgbModalRef, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalGuardarVacanteComponent } from '../pages/vacantes/components/modal-guardar-vacante/modal-guardar-vacante.component'
 const base_url = environment.base_url;
@@ -17,19 +17,23 @@ export class VacantesService {
 
   constructor (private http: HttpClient, public modalService: NgbModal) { }
 
-
-
-  obtenerVacantes () {
-    return this.http.get<RespuestaGets<Vacante>>(`${base_url}/vacantes`);
+  obtenerVacantesPaginado (limit: number, page: number) {
+    const params = new HttpParams().set('limit', limit).set('page', page);
+    return this.http.get<RespuestaPaginada<Vacante>>(`${base_url}/vacantes`, { params });
   }
 
   crearVacante (formDate: Vacante) {
-    return this.http.post<RespuestaPost<Vacante>>(`${base_url}/vacantes`, formDate);
+    return this.http.post<Respuesta<Vacante>>(`${base_url}/vacantes`, formDate);
   }
 
   editarVacante (formDate: Vacante) {
-    return this.http.put<RespuestaPost<Vacante>>(`${base_url}/vacantes/${formDate.id}`, formDate);
+    return this.http.put<Respuesta<Vacante>>(`${base_url}/vacantes/${formDate.id}`, formDate);
   }
+
+  cambiarEstado (idVacante: number) {
+    return this.http.delete<Respuesta<Vacante>>(`${base_url}/vacantes/${idVacante}`);
+  }
+
 
   abrirModalVacante (vacante?: Vacante) {
     this.modalVacante = this.modalService.open(ModalGuardarVacanteComponent, { size: 'lg', backdrop: 'static' });

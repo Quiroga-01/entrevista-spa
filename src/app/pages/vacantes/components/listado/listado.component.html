@@ -1,4 +1,28 @@
-<table class="table align-middle text-nowrap">
-  <thead app-listado-head></thead>
-  <tbody app-listado-body [vacantes]="vacantes"></tbody>
-</table>
+<div class="row mb-3">
+  <div class="col-md-12 text-end">
+    Registros por pagina:
+    <div class="btn-group ms-3" role="group">
+      <input type="radio" [(ngModel)]="limit" (change)="obtenerVacantes()" [value]="5" class="btn-check" id="btnradio1" autocomplete="off">
+      <label class="btn btn-outline-primary" for="btnradio1">5</label>
+
+      <input type="radio" [(ngModel)]="limit" (change)="obtenerVacantes()" [value]="10" class="btn-check" id="btnradio2" autocomplete="off">
+      <label class="btn btn-outline-primary" for="btnradio2">10</label>
+    </div>
+  </div>
+</div>
+<div class="table-responsive">
+  <table class="table align-middle text-nowrap table-hover table-striped">
+    <thead app-listado-head></thead>
+    <tbody app-listado-body [vacantes]=" vacantes"></tbody>
+  </table>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <ngb-pagination [pageSize]="limit" [ellipses]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)" [maxSize]="5" [(page)]="page"
+      [collectionSize]="totalItems">
+    </ngb-pagination>
+  </div>
+  <div class="col-md-6 text-end">
+    Total de Registros: <strong>{{totalItems}}</strong>
+  </div>
+</div>

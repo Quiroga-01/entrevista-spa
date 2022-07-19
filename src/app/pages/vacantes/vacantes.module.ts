@@ -2,10 +2,11 @@ import { ModalGuardarVacanteComponent } from './components/modal-guardar-vacante
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { VacantesComponent } from './vacantes.component';
-import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ListadoComponent } from './components/listado/listado.component';
 import { ListadoHeadComponent } from './components/listado-head/listado-head.component';
 import { ListadoBodyComponent } from './components/listado-body/listado-body.component';
+import { NgbPagination, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -20,7 +21,8 @@ import { ListadoBodyComponent } from './components/listado-body/listado-body.com
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule
   ]
 })
 export class VacantesModule { }

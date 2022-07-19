@@ -21,9 +21,10 @@
   <td class="">
     <div class="btn-group">
       <button type="button" (click)="vacantesService.abrirModalVacante(vac)" class="btn btn-info"><i class="bi bi-pencil-square"></i></button>
-      <button *ngIf="vac.activo; else btnInactivo" class="btn btn-danger"><i class="bi bi-x-square"></i></button>
+      <button *ngIf="vac.activo; else btnInactivo" (click)="cambiarEstado(vac.id,'inactivo')" class="btn btn-danger"><i
+          class="bi bi-x-square"></i></button>
       <ng-template #btnInactivo>
-        <button class="btn btn-success"><i class="bi bi-check2"></i></button>
+        <button class="btn btn-success" (click)="cambiarEstado(vac.id,'activo')"><i class="bi bi-check2"></i></button>
       </ng-template>
     </div>
   </td>
